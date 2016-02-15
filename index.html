@@ -19,7 +19,7 @@ function onError(e){
 	alert("Error " + e.code + e.message);
 }
 function onSuccess(){
-	$("#result").html("Success");
+	//$("#result").html("Success");
 }
 function createDB(t){
 	t.executeSql('CREATE TABLE IF NOT EXISTS testtable1(id, product)');
@@ -27,7 +27,7 @@ function createDB(t){
 	t.executeSql('INSERT INTO testtable1(id, product) VALUES (2, "Product 2")');
 }
 function read(){
-	mydb.transaction(queryDB, onError)
+	mydb.transaction(queryDB, onSuccess, onError)
 }
 function queryDB(t){
 	t.executeSql('SELECT * FROM testtable1',[], querySuccess, onError);
@@ -35,7 +35,7 @@ function queryDB(t){
 function querySuccess(t, results){
 	var output = "";
 	for (var i = 0; i < results.rows.length; i++){
-		str += results.rows.item(i).id + " " + results.rows.item(i).product + " <br/>";
+		output += results.rows.item(i).id + " " + results.rows.item(i).product + " <br/>";
 	}
 	$("#result").html(output);
 }
