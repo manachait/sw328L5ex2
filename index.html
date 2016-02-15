@@ -13,7 +13,7 @@ function init(){
 function onDeviceReady(){
     $("#checkdevice").html("Device is ready");
 	mydb = window.openDatabase("db1", "1.0", "Test DB", 1024 * 1024);
-	addRecord();	
+	mydb.transaction(createDB, onError, onSuccess)
 }
 function onError(e){
 	alert("Error " + e.code + e.message);
@@ -21,13 +21,23 @@ function onError(e){
 function onSuccess(){
 	$("#result").html("Success");
 }
-function addRecord(){
-	mydb.transaction(createDB, onError, onSuccess)
-}
-
 function createDB(t){
 	t.executeSql('CREATE TABLE IF NOT EXISTS testtable1(id, product)');
 	t.executeSql('INSERT INTO testtable1(id, product) VALUES (1, "Product 1")');
+	t.executeSql('INSERT INTO testtable1(id, product) VALUES (2, "Product 2")');
+}
+function read(){
+	mydb.transaction(queryDB, onError)
+}
+function queryDB(t){
+	t.executeSql('SELECT * FROM testtable1',[], querySuccess, onError);
+}
+function querySuccess(t, results){
+	var output = "";
+	for (var i = 0; i < results.rows.length){
+		str += results.rows.item(i).id + " " + results.rows.item(i).product + " <br/>";
+	}
+	$("#result").html(output);
 }
 </script>
 </head>
