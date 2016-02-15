@@ -13,7 +13,7 @@ function init(){
 function onDeviceReady(){
     $("#checkdevice").html("Device is ready");
 	mydb = window.openDatabase("db1", "1.0", "Test DB", 1024 * 1024);
-	mydb.transaction(createDB, onError, onSuccess)
+	mydb.transaction(createDB, onSuccess, onError)
 }
 function onError(e){
 	alert("Error " + e.code + e.message);
