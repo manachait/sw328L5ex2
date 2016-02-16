@@ -21,7 +21,7 @@ function onError(e){
 }
 function onSuccess(){
 	//$("#result").html("Success");
-	window.location.assign("page2.html");
+	window.location = "page2.html";
 }
 function createDB(t){
 	t.executeSql('CREATE TABLE IF NOT EXISTS user(userid, password)');
