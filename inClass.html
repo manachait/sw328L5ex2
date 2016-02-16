@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script type = "text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type = "text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+<script>
+function init(){
+document.addEventListener("deviceready", onDeviceReady, false);
+}
+function onDeviceReady(){
+$("#checkdevice").html("Device is ready");
+}
+function save(){
+var myData = $("#data").val();
+window.localStorage.setItem("data", myData);
+$("#result").html("The value of data is " + myData);
+}
+</script>
+</head>
+<body onload="init()">
+<h1 id="checkdevice">Wait...</h1>
+<input type="text" id="data"/><br/>
+<div id="result"></div><br/>
+<a href="JavaScript: save();" CLASS="ui-btn ui-shadow">Save Data</a>
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
